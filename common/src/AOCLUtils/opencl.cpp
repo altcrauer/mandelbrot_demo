@@ -302,7 +302,7 @@ cl_platform_id findPlatform(const char *platform_name_search) {
   // For each platform, get name and compare against the search string.
   for(unsigned i = 0; i < num_platforms; ++i) {
     std::string name = getPlatformName(pids[i]);
-
+    
     // Convert to lower case.
     std::transform(name.begin(), name.end(), name.begin(), tolower);
 
@@ -392,6 +392,50 @@ cl_program createProgramFromBinary(cl_context context, const char *binary_file_n
     checkError(binary_status[i], "Failed to load binary for device");
   }
 
+  return program;
+}
+
+// Create a program for all devices associated with the context.
+cl_program createProgramFromSource(cl_context context, const char *binary_file_name, const cl_device_id *devices, unsigned num_devices) {
+  // Early exit for potentially the most common way to fail: AOCX does not exist.
+  if(!fileExists(binary_file_name)) {
+    printf("AOCX file '%s' does not exist.\n", binary_file_name);
+    checkError(CL_INVALID_PROGRAM, "Failed to load binary file");
+  }
+
+  // Load the binary.
+  size_t binary_size;
+  scoped_array<unsigned char> binary(loadBinaryFile(binary_file_name, &binary_size));
+  if(binary == NULL) {
+    checkError(CL_INVALID_PROGRAM, "Failed to load binary file");
+  }
+
+  scoped_array<size_t> binary_lengths(num_devices);
+  scoped_array<unsigned char *> binaries(num_devices);
+  for(unsigned i = 0; i < num_devices; ++i) {
+    binary_lengths[i] = binary_size;
+    binaries[i] = binary;
+  }
+
+  cl_int status;
+  cl_program program = clCreateProgramWithSource(context, num_devices,
+      (const char **) binaries.get(), binary_lengths, &status);
+  checkError(status, "Failed to create program with source");
+  
+  status = clBuildProgram(program, num_devices, devices, "", NULL, NULL);
+  
+  if(status != CL_SUCCESS)
+  {
+    char buffer[1024];
+    size_t buf_size = 1024;
+    size_t ret_size = 0;
+    cl_int status2 = clGetProgramBuildInfo(program, devices[0], CL_PROGRAM_BUILD_LOG, buf_size, buffer, &ret_size);
+    buffer[ret_size] = 0;
+    printf("BUILD LOG: %s\n", buffer);
+  }
+  checkError(status, "Failed to build program");
+
+  
   return program;
 }
 
