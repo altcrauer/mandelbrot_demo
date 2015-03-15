@@ -1,16 +1,8 @@
-# Where is the Altera SDK for OpenCL software?
-ifeq ($(wildcard $(ALTERAOCLSDKROOT)),)
-$(error Set ALTERAOCLSDKROOT to the root directory of the Altera SDK for OpenCL software installation)
-endif
-ifeq ($(wildcard $(ALTERAOCLSDKROOT)/host/include/CL/opencl.h),)
-$(error Set ALTERAOCLSDKROOT to the root directory of the Altera SDK for OpenCL software installation.)
-endif
-
 # OpenCL compile and link flags.
-AOCL_COMPILE_CONFIG := $(shell aocl compile-config)
-AOCL_LINK_CONFIG := $(shell aocl link-config)
+AOCL_COMPILE_CONFIG := -I/altera/opencl_runtime/khronos_headers/CL1.2/
+AOCL_LINK_CONFIG = /altera/opencl_runtime/amd_sdk/usr/lib64/libOpenCL.so.1
 
-OTHER_TARGETS := bin/mandelbrot_kernel.aocx
+#OTHER_TARGETS := bin/mandelbrot_kernel.aocx
 
 MK_SRCS := Makefile.altera
 include common.mk
