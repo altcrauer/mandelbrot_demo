@@ -396,7 +396,7 @@ cl_program createProgramFromBinary(cl_context context, const char *binary_file_n
 }
 
 // Create a program for all devices associated with the context.
-cl_program createProgramFromSource(cl_context context, const char *binary_file_name, const cl_device_id *devices, unsigned num_devices) {
+cl_program createProgramFromSource(cl_context context, const char *binary_file_name, const cl_device_id *devices, unsigned num_devices, const char *build_options) {
   // Early exit for potentially the most common way to fail: AOCX does not exist.
   if(!fileExists(binary_file_name)) {
     printf("AOCX file '%s' does not exist.\n", binary_file_name);
@@ -422,7 +422,7 @@ cl_program createProgramFromSource(cl_context context, const char *binary_file_n
       (const char **) binaries.get(), binary_lengths, &status);
   checkError(status, "Failed to create program with source");
   
-  status = clBuildProgram(program, num_devices, devices, "", NULL, NULL);
+  status = clBuildProgram(program, num_devices, devices, build_options, NULL, NULL);
   
   if(status != CL_SUCCESS)
   {
