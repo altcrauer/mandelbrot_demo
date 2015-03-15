@@ -92,7 +92,8 @@ int hardwareInitialize()
   }
 
   // Set up the platform
-  thePlatform = findPlatform("Altera");
+  //thePlatform = findPlatform("Altera");
+  thePlatform = findPlatform("AMD Accelerated Parallel Processing");
   if(thePlatform == NULL)
   {
     printf("Found no platforms!\n");
@@ -125,12 +126,14 @@ int hardwareInitialize()
   const char *kernel_name = "hw_mandelbrot_frame";
   
   // Create the program using the binary aocx file
-  std::string binary_file = getBoardBinaryFile("mandelbrot_kernel", theDevices[0]);
+  //std::string binary_file = getBoardBinaryFile("mandelbrot_kernel", theDevices[0]);
+  std::string binary_file = "../device/mandelbrot_kernel.cl";
   printf("Using AOCX: %s\n", binary_file.c_str());
-  theProgram = createProgramFromBinary(theContext, binary_file.c_str(), theDevices, numDevices);
-
+  //theProgram = createProgramFromBinary(theContext, binary_file.c_str(), theDevices, numDevices);
+  theProgram = createProgramFromSource(theContext, binary_file.c_str(), theDevices, numDevices, "-DDONT_USE_PRAGMA");
   // Create the kernels
   theKernels.reset(numDevices);
+
   for(unsigned i = 0; i < numDevices; ++i) {
     theKernels[i] = clCreateKernel(theProgram, kernel_name, &theStatus);
     checkError(theStatus, "Failed to create kernel");

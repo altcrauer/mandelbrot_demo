@@ -59,7 +59,9 @@ void hw_mandelbrot_frame (
   //
   // The loop unrolling factor can be adjusted based on the amount of FPGA
   // resources available.
+  #ifndef DONT_USE_PRAGMA
   #pragma unroll UNROLL
+  #endif
 	while (	xSqr + ySqr < 4.0 &&
 			iterations < maxIterations)
 	{
