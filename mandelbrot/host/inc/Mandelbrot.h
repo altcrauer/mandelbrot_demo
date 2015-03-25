@@ -24,7 +24,7 @@
 
 #include "coordinates.h"
 
-#include "AOCLUtils/aocl_utils.h"
+#include "aocl_utils.h"
 
 #include "HardwareMandelbrot.h"
 #include "SoftwareMandelbrot.h"

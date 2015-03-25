@@ -20,7 +20,7 @@
 // by the laws of the United States of America.
 
 #include "StopWatch.h"
-#include "AOCLUtils/aocl_utils.h"
+#include "aocl_utils.h"
 #include <stdlib.h>
 
 // Set the start data of a stopwatch

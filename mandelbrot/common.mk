@@ -20,12 +20,12 @@ TARGET := mandelbrot
 TARGET_DIR := bin
 
 # Directories
-INC_DIRS := host/inc ../common/inc ../extlibs/inc
+INC_DIRS := host/inc . ../extlibs/inc
 LIB_DIRS := ../extlibs/lib
 
 # Files
 INCS := $(wildcard host/inc/*.h)
-SRCS := $(wildcard host/src/*.cpp ../common/src/AOCLUtils/*.cpp)
+SRCS := $(wildcard host/src/*.cpp *.cpp)
 LIBS := SDL2
 
 # Make it all!

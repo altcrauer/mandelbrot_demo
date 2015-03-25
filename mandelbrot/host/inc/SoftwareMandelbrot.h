@@ -27,7 +27,7 @@
 #include <iomanip>
 #include <cstdlib>
 #include <stdint.h>
-#include "AOCLUtils/aocl_utils.h"
+#include "aocl_utils.h"
 
 // Software Mandelbrot
 int softwareInitialize();

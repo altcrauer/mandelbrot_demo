@@ -32,9 +32,9 @@ using std::endl;
 using std::ends;
 using std::min;
 
-#include "AOCLUtils/aocl_utils.h"
+#include "aocl_utils.h"
 #include "MandelbrotWindow.h"
-#include "AOCLUtils/aocl_utils.h"
+#include "aocl_utils.h"
 
 using namespace aocl_utils;
 

@@ -29,7 +29,7 @@
 #include <assert.h>
 
 #include "CL/opencl.h"
-#include "AOCLUtils/aocl_utils.h"
+#include "aocl_utils.h"
 
 // Hardware Mandelbrot
 int hardwareInitialize();
