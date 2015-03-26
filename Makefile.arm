@@ -1,0 +1,18 @@
+# Where is the Altera SDK for OpenCL software?
+ifeq ($(wildcard $(ALTERAOCLSDKROOT)),)
+$(error Set ALTERAOCLSDKROOT to the root directory of the Altera SDK for OpenCL software installation)
+endif
+ifeq ($(wildcard $(ALTERAOCLSDKROOT)/host/include/CL/opencl.h),)
+$(error Set ALTERAOCLSDKROOT to the root directory of the Altera SDK for OpenCL software installation.)
+endif
+
+# OpenCL compile and link flags.
+AOCL_COMPILE_CONFIG := $(shell aocl compile-config --arm)
+AOCL_LINK_CONFIG := $(shell aocl link-config --arm)
+
+MK_SRCS := Makefile.arm
+EXTLIBS_DIR := ./extlibs_arm
+CXX := arm-linux-gnueabihf-g++
+
+include common.mk
+

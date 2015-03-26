@@ -13,15 +13,17 @@ CXXFLAGS += -O2
 endif
 
 # Compiler
-CXX := g++
+CXX ?= g++
 
 # Target
 TARGET := mandelbrot
 TARGET_DIR := bin
 
+EXTLIBS_DIR ?= ./extlibs
+
 # Directories
-INC_DIRS := . ./extlibs/inc
-LIB_DIRS := ./extlibs/lib
+INC_DIRS := . $(EXTLIBS_DIR)/inc
+LIB_DIRS := $(EXTLIBS_DIR)/lib
 
 # Files
 INCS := $(wildcard *.h)
