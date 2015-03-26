@@ -39,9 +39,9 @@ int hardwareSetColorTable(
   unsigned int aColorTableSize);
 
 int hardwareCalculateFrame(
-  double aStartX,
-  double aStartY,
-  double aScale,
+  float aStartX,
+  float aStartY,
+  float aScale,
   unsigned int* aFrameBuffer);
 
 int hardwareRelease();

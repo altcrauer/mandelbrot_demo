@@ -68,7 +68,7 @@ int mandelbrotCalculateFrame(
 {
   // Use either hardware or software to do the frame calculation
   if(theCalculationMethod == HARDWARE)
-    return hardwareCalculateFrame(aStartX, aStartY, aScale, aFramebuffer);
+    return hardwareCalculateFrame((float)aStartX, (float)aStartY, (float)aScale, aFramebuffer);
 
   else
     return softwareCalculateFrame(aStartX, aStartY, aScale, aFramebuffer);

@@ -172,9 +172,9 @@ int hardwareSetColorTable(
 
 // calculate the current frame using Altera hardware
 int hardwareCalculateFrame(
-  double aStartX,
-  double aStartY,
-  double aScale,
+  float aStartX,
+  float aStartY,
+  float aScale,
   unsigned int* aFrameBuffer)
 {
   // Make sure width and height match up
@@ -188,14 +188,14 @@ int hardwareCalculateFrame(
 
     // Set the arguments
     unsigned argi = 0;
-    theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(cl_double), (void*)&aStartX);
+    theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(cl_float), (void*)&aStartX);
     checkError(theStatus, "Failed to set kernel argument %d", argi - 1);
 
-    const double offsetedStartY = aStartY - rowOffset * aScale;
-    theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(cl_double), (void*)&offsetedStartY);
+    const float offsetedStartY = aStartY - rowOffset * aScale;
+    theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(cl_float), (void*)&offsetedStartY);
     checkError(theStatus, "Failed to set kernel argument %d", argi - 1);
 
-    theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(cl_double), (void*)&aScale);
+    theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(cl_float), (void*)&aScale);
     checkError(theStatus, "Failed to set kernel argument %d", argi - 1);
 
     theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(cl_uint), (void*)&theHardColorTableSize);

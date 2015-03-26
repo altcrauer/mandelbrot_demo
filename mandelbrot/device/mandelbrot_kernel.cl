@@ -33,9 +33,9 @@
 ////////////////////////////////////////////////////////////////////
 __kernel 
 void hw_mandelbrot_frame (
-              const double x0,
-							const double y0,
-							const double stepSize,
+              const float x0,
+							const float y0,
+							const float stepSize,
 							const unsigned int maxIterations,
 							__global unsigned int *restrict framebuffer,
 							__constant const unsigned int *restrict colorLUT,
@@ -44,14 +44,14 @@ void hw_mandelbrot_frame (
 	// Work-item position
 	const size_t windowPosX = get_global_id(0);
 	const size_t windowPosY = get_global_id(1);
-	const double stepPosX = x0 + (windowPosX * stepSize);
-	const double stepPosY = y0 - (windowPosY * stepSize);
+	const float stepPosX = x0 + (windowPosX * stepSize);
+	const float stepPosY = y0 - (windowPosY * stepSize);
 
 	// Variables for the calculation
-	double x = 0.0;
-	double y = 0.0;
-	double xSqr = 0.0;
-	double ySqr = 0.0;
+	float x = 0.0;
+	float y = 0.0;
+	float xSqr = 0.0;
+	float ySqr = 0.0;
 	unsigned int iterations = 0;
 
 	// Perform up to the maximum number of iterations to solve
