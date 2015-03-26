@@ -9,4 +9,4 @@ include common.mk
 
 run:
 	cd bin && \
-	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):../../extlibs/lib ./mandelbrot
+	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):./extlibs/lib ./mandelbrot

@@ -20,8 +20,8 @@ TARGET := mandelbrot
 TARGET_DIR := bin
 
 # Directories
-INC_DIRS := . ../extlibs/inc
-LIB_DIRS := ../extlibs/lib
+INC_DIRS := . ./extlibs/inc
+LIB_DIRS := ./extlibs/lib
 
 # Files
 INCS := $(wildcard *.h)
