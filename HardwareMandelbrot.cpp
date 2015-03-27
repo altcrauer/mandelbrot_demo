@@ -93,7 +93,8 @@ int hardwareInitialize()
 
   // Set up the platform
   //thePlatform = findPlatform("Altera");
-  thePlatform = findPlatform("AMD Accelerated Parallel Processing");
+  //thePlatform = findPlatform("AMD Accelerated Parallel Processing");
+  thePlatform = findAnyPlatform();
   if(thePlatform == NULL)
   {
     printf("Found no platforms!\n");
@@ -110,7 +111,7 @@ int hardwareInitialize()
   for(unsigned i = 0; i < numDevices; ++i) {
     printf("  %s\n", getDeviceName(theDevices[i]).c_str());
   }
-
+  
   // Create a context
   theContext = clCreateContext(0, numDevices, theDevices, &oclContextCallback, NULL, &theStatus);
   checkError(theStatus, "Failed to create context");
@@ -125,12 +126,18 @@ int hardwareInitialize()
   // the name of the kernel we are going to load
   const char *kernel_name = "hw_mandelbrot_frame";
   
-  // Create the program using the binary aocx file
-  //std::string binary_file = getBoardBinaryFile("mandelbrot_kernel", theDevices[0]);
-  std::string binary_file = "../device/mandelbrot_kernel.cl";
-  printf("Using AOCX: %s\n", binary_file.c_str());
-  //theProgram = createProgramFromBinary(theContext, binary_file.c_str(), theDevices, numDevices);
-  theProgram = createProgramFromSource(theContext, binary_file.c_str(), theDevices, numDevices, "-DDONT_USE_PRAGMA");
+  if(isAlteraPlatform(thePlatform))
+  {
+    //Create the program using the binary aocx file
+    std::string binary_file = getBoardBinaryFile("mandelbrot_kernel", theDevices[0]);
+    theProgram = createProgramFromBinary(theContext, binary_file.c_str(), theDevices, numDevices);
+  }
+  else
+  {
+    std::string binary_file = "../device/mandelbrot_kernel.cl";
+    printf("Using AOCX: %s\n", binary_file.c_str());
+    theProgram = createProgramFromSource(theContext, binary_file.c_str(), theDevices, numDevices, "-DDONT_USE_PRAGMA");
+  }
   // Create the kernels
   theKernels.reset(numDevices);
 

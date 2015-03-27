@@ -316,6 +316,27 @@ cl_platform_id findPlatform(const char *platform_name_search) {
   return NULL;
 }
 
+// Searches all platforms for the first platform whose name
+// contains the search string (case-insensitive).
+cl_platform_id findAnyPlatform() {
+  cl_int status;
+
+  // Get number of platforms.
+  cl_uint num_platforms;
+  status = clGetPlatformIDs(0, NULL, &num_platforms);
+  checkError(status, "Query for number of platforms failed");
+
+  if(num_platforms <= 0)
+    return NULL;
+  
+  // Get a list of all platform ids.
+  scoped_array<cl_platform_id> pids(num_platforms);
+  status = clGetPlatformIDs(num_platforms, pids, NULL);
+  checkError(status, "Query for all platform ids failed");
+  
+  return pids[0];
+}
+
 // Returns the platform name.
 std::string getPlatformName(cl_platform_id pid) {
   cl_int status;
@@ -329,6 +350,16 @@ std::string getPlatformName(cl_platform_id pid) {
   checkError(status, "Query for platform name failed");
 
   return name.get();
+}
+
+//check for Altera platform
+bool isAlteraPlatform(cl_platform_id pid) {
+  std::string name = getPlatformName(pid);
+  
+  if(strstr(name.c_str(), "Altera"))
+    return true;
+  
+  return false;
 }
 
 // Returns the device name.

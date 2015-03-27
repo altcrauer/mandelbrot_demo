@@ -118,6 +118,9 @@ void waitMilliseconds(unsigned ms);
 // to stdout (via printf).
 void oclContextCallback(const char *errinfo, const void *, size_t, void *);
 
+bool isAlteraPlatform(cl_platform_id pid);
+cl_platform_id findAnyPlatform();
+
 } // ns aocl_utils
 
 #endif
