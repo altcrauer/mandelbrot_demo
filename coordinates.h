@@ -32,22 +32,24 @@ struct coordinates {
   double scale;
 };
 
+const double demo_scale_factor = 3.0;
+
 // Location and scales of a set of positions to run through when
 // the program is run in "demo mode"
 const struct coordinates theDemoLocations[NUMBER_OF_COORDINATES] =
 {
-  {-2.0, 1.15, 0.0035},
-  {-0.7302032, -0.2080147, 0.0000002},
-  {-2.0, 1.15, 0.0035},
-  {-0.1072627, -0.9120693, 0.0000001},
-  {-2.0, 1.15, 0.0035},
-  {-1.7868170, 0.0030061, 0.0000002},
-  {-2.0, 1.15, 0.0035},
-  {0.3382314, -0.4132462, 0.0000002},
-  {-2.0, 1.15, 0.0035},
-  {-0.708210525513, -0.244819641113, 0.000000381470},
-  {-2.0, 1.15, 0.0035},
-  {-0.793605729416, -0.149912039936, 0.000000000373},
+  {-2.0, 1.15, 0.0035*demo_scale_factor},
+  {-0.7302032, -0.2080147, 0.0000002*demo_scale_factor},
+  {-2.0, 1.15, 0.0035*demo_scale_factor},
+  {-0.1072627, -0.9120693, 0.0000001*demo_scale_factor},
+  {-2.0, 1.15, 0.0035*demo_scale_factor},
+  {-1.7868170, 0.0030061, 0.0000002*demo_scale_factor},
+  {-2.0, 1.15, 0.0035*demo_scale_factor},
+  {0.3382314, -0.4132462, 0.0000002*demo_scale_factor},
+  {-2.0, 1.15, 0.0035*demo_scale_factor},
+  {-0.708210525513, -0.244819641113, 0.000000381470*demo_scale_factor},
+  {-2.0, 1.15, 0.0035*demo_scale_factor},
+  {-0.793605729416, -0.149912039936, 0.000000000373*demo_scale_factor},
 };
 
 // Location and scales of a set of positions for test mode.
