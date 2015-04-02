@@ -121,8 +121,8 @@ int main(int argc, char **argv)
   // Process options.
   Options options(argc, argv);
 
-  unsigned width = 800;
-  unsigned height = 640;
+  unsigned width = 320;
+  unsigned height = 240;
 
   if(options.has("w")) {
     width = options.get<unsigned>("w");

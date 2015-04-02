@@ -40,7 +40,7 @@ static unsigned int theCurrentFrame;
 
 // Motion driver variables
 bool theProgramRunning = true;
-unsigned theDemoRunning = false;    // bool causes problems with MSVC Release mode
+unsigned theDemoRunning = true;    // bool causes problems with MSVC Release mode
 extern int theCalculationMethod;
 extern bool smoothMotion;
 
@@ -95,9 +95,12 @@ int mandelbrotWindowInitialize(
   {
     // Create the SDL Window
     theWindow = SDL_CreateWindow("Mandelbrot",
-      SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+      //SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+      0,0,
       theWidth, theHeight,
-      SDL_WINDOW_SHOWN);
+      //SDL_WINDOW_FULLSCREEN_DESKTOP);
+      //SDL_WINDOW_SHOWN);
+      SDL_WINDOW_FULLSCREEN);
 
     // Make sure the window was created successfully
     if(theWindow == NULL)
@@ -108,6 +111,8 @@ int mandelbrotWindowInitialize(
       exit(1);
     }
 
+    SDL_ShowCursor(0);
+    
     // Get the surface of the window
     theWindowSurface = SDL_GetWindowSurface(theWindow);
 
