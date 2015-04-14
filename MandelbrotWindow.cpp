@@ -20,6 +20,7 @@
 // by the laws of the United States of America.
 
 #include "MandelbrotWindow.h"
+#include "config.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -99,8 +100,8 @@ int mandelbrotWindowInitialize(
       0,0,
       theWidth, theHeight,
       //SDL_WINDOW_FULLSCREEN_DESKTOP);
-      //SDL_WINDOW_SHOWN);
-      SDL_WINDOW_FULLSCREEN);
+      SDL_WINDOW_SHOWN);
+      //SDL_WINDOW_FULLSCREEN);
 
     // Make sure the window was created successfully
     if(theWindow == NULL)

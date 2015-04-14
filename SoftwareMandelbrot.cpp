@@ -20,6 +20,7 @@
 // by the laws of the United States of America.
 
 #include "SoftwareMandelbrot.h"
+#include "config.h"
 
 using namespace aocl_utils;
 
@@ -33,15 +34,15 @@ static unsigned short int theSoftColorTableSize = 0;
 
 // compute the mandel value of a pixel
 inline unsigned int mandel_pixel(
-  double x0,
-  double y0,
+  MANDELBROT_SW_PRECISION x0,
+  MANDELBROT_SW_PRECISION y0,
   unsigned int maxIterations)
 {
   // variables for the calculation
-  double x = 0.0;
-  double y = 0.0;
-  double xSqr = 0.0;
-  double ySqr = 0.0;
+  MANDELBROT_SW_PRECISION x = 0.0;
+  MANDELBROT_SW_PRECISION y = 0.0;
+  MANDELBROT_SW_PRECISION xSqr = 0.0;
+  MANDELBROT_SW_PRECISION ySqr = 0.0;
   unsigned int iterations = 0;
 
   // perform up to the maximum number of iterations to solve
@@ -97,9 +98,9 @@ int softwareSetColorTable(
 
 // Use the cpu to calculate a frame
 int softwareCalculateFrame(
-  double aStartX,
-  double aStartY,
-  double aScale,
+  MANDELBROT_SW_PRECISION aStartX,
+  MANDELBROT_SW_PRECISION aStartY,
+  MANDELBROT_SW_PRECISION aScale,
   unsigned short int* aFrameBuffer)
 {
   // temporary pointer and index variables
@@ -107,10 +108,10 @@ int softwareCalculateFrame(
   unsigned int j, k, pixel;
 
   // window position variables
-  double x = aStartX;
-  double y = aStartY;
-  double cur_x, cur_y;
-  double cur_step_size = aScale;
+  MANDELBROT_SW_PRECISION x = aStartX;
+  MANDELBROT_SW_PRECISION y = aStartY;
+  MANDELBROT_SW_PRECISION cur_x, cur_y;
+  MANDELBROT_SW_PRECISION cur_step_size = aScale;
 
   // for each pixel in the y dimension window
   for (j = 0, cur_y = y; j < theHeight; j++, cur_y -= cur_step_size)

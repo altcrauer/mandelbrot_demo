@@ -25,6 +25,16 @@
 #define UNROLL 8
 #endif
 
+#if !defined(USE_DOUBLE) && !defined(USE_FLOAT)
+#define USE_FLOAT
+#endif
+
+#ifdef USE_DOUBLE
+#define MANDELBROT_HW_PRECISION double
+#else
+#define MANDELBROT_HW_PRECISION float
+#endif
+
 // Define the color black as 0
 #define BLACK 0x00000000
 
@@ -33,9 +43,9 @@
 ////////////////////////////////////////////////////////////////////
 __kernel 
 void hw_mandelbrot_frame (
-              const float x0,
-							const float y0,
-							const float stepSize,
+              const MANDELBROT_HW_PRECISION x0,
+							const MANDELBROT_HW_PRECISION y0,
+							const MANDELBROT_HW_PRECISION stepSize,
 							const unsigned int maxIterations,
 							__global unsigned short int *restrict framebuffer,
 							__constant const unsigned short int *restrict colorLUT,
@@ -44,14 +54,14 @@ void hw_mandelbrot_frame (
 	// Work-item position
 	const size_t windowPosX = get_global_id(0);
 	const size_t windowPosY = get_global_id(1);
-	const float stepPosX = x0 + (windowPosX * stepSize);
-	const float stepPosY = y0 - (windowPosY * stepSize);
+	const MANDELBROT_HW_PRECISION stepPosX = x0 + (windowPosX * stepSize);
+	const MANDELBROT_HW_PRECISION stepPosY = y0 - (windowPosY * stepSize);
 
 	// Variables for the calculation
-	float x = 0.0;
-	float y = 0.0;
-	float xSqr = 0.0;
-	float ySqr = 0.0;
+	MANDELBROT_HW_PRECISION x = 0.0;
+	MANDELBROT_HW_PRECISION y = 0.0;
+	MANDELBROT_HW_PRECISION xSqr = 0.0;
+	MANDELBROT_HW_PRECISION ySqr = 0.0;
 	unsigned int iterations = 0;
 
 	// Perform up to the maximum number of iterations to solve

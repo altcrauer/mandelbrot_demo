@@ -28,6 +28,7 @@
 
 #include "HardwareMandelbrot.h"
 #include "SoftwareMandelbrot.h"
+#include "config.h"
 
 // Define labels for using software or hardware to calculate the frame
 #define HARDWARE 0

@@ -20,6 +20,7 @@
 // by the laws of the United States of America.
 
 #include "Mandelbrot.h"
+#include "config.h"
 
 // Hardware or software
 int theCalculationMethod = HARDWARE;
@@ -68,10 +69,10 @@ int mandelbrotCalculateFrame(
 {
   // Use either hardware or software to do the frame calculation
   if(theCalculationMethod == HARDWARE)
-    return hardwareCalculateFrame((float)aStartX, (float)aStartY, (float)aScale, aFramebuffer);
+    return hardwareCalculateFrame((MANDELBROT_HW_PRECISION)aStartX, (MANDELBROT_HW_PRECISION)aStartY, (MANDELBROT_HW_PRECISION)aScale, aFramebuffer);
 
   else
-    return softwareCalculateFrame(aStartX, aStartY, aScale, aFramebuffer);
+    return softwareCalculateFrame((MANDELBROT_SW_PRECISION)aStartX, (MANDELBROT_SW_PRECISION)aStartY, (MANDELBROT_SW_PRECISION)aScale, aFramebuffer);
 
   // Return success
   return 0;

@@ -30,6 +30,7 @@
 
 #include "CL/opencl.h"
 #include "aocl_utils.h"
+#include "config.h"
 
 // Hardware Mandelbrot
 int hardwareInitialize();
@@ -39,9 +40,9 @@ int hardwareSetColorTable(
   unsigned int aColorTableSize);
 
 int hardwareCalculateFrame(
-  float aStartX,
-  float aStartY,
-  float aScale,
+  MANDELBROT_HW_PRECISION aStartX,
+  MANDELBROT_HW_PRECISION aStartY,
+  MANDELBROT_HW_PRECISION aScale,
   unsigned short int* aFrameBuffer);
 
 int hardwareRelease();

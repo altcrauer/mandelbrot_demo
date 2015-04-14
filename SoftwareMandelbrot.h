@@ -28,6 +28,7 @@
 #include <cstdlib>
 #include <stdint.h>
 #include "aocl_utils.h"
+#include "config.h"
 
 // Software Mandelbrot
 int softwareInitialize();
@@ -35,9 +36,9 @@ int softwareInitialize();
 int softwareSetColorTable(unsigned short int* aColorTable,
   unsigned int aColorTableSize);
 
-int softwareCalculateFrame(double aStartX,
-  double aStartY,
-  double aScale,
+int softwareCalculateFrame(MANDELBROT_SW_PRECISION aStartX,
+  MANDELBROT_SW_PRECISION aStartY,
+  MANDELBROT_SW_PRECISION aScale,
   unsigned short int* aFrameBuffer);
 
 int softwareRelease();

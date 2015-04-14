@@ -20,6 +20,7 @@
 // by the laws of the United States of America.
 
 #include "Mouse.h"
+#include "config.h"
 
 // mouse button state maps (0 = UP, 1 = DOWN)
 static char theMouseButtonState[3];

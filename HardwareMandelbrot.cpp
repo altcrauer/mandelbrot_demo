@@ -20,6 +20,7 @@
 // by the laws of the United States of America.
 
 #include "HardwareMandelbrot.h"
+#include "config.h"
 
 using namespace aocl_utils;
 
@@ -179,9 +180,9 @@ int hardwareSetColorTable(
 
 // calculate the current frame using Altera hardware
 int hardwareCalculateFrame(
-  float aStartX,
-  float aStartY,
-  float aScale,
+  MANDELBROT_HW_PRECISION aStartX,
+  MANDELBROT_HW_PRECISION aStartY,
+  MANDELBROT_HW_PRECISION aScale,
   unsigned short int* aFrameBuffer)
 {
   // Make sure width and height match up
@@ -195,14 +196,14 @@ int hardwareCalculateFrame(
 
     // Set the arguments
     unsigned argi = 0;
-    theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(cl_float), (void*)&aStartX);
+    theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(MANDELBROT_CL_PRECISION), (void*)&aStartX);
     checkError(theStatus, "Failed to set kernel argument %d", argi - 1);
 
-    const float offsetedStartY = aStartY - rowOffset * aScale;
-    theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(cl_float), (void*)&offsetedStartY);
+    const MANDELBROT_HW_PRECISION offsetedStartY = aStartY - rowOffset * aScale;
+    theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(MANDELBROT_CL_PRECISION), (void*)&offsetedStartY);
     checkError(theStatus, "Failed to set kernel argument %d", argi - 1);
 
-    theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(cl_float), (void*)&aScale);
+    theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(MANDELBROT_CL_PRECISION), (void*)&aScale);
     checkError(theStatus, "Failed to set kernel argument %d", argi - 1);
 
     theStatus = clSetKernelArg(theKernels[i], argi++, sizeof(cl_uint), (void*)&theHardColorTableSize);
