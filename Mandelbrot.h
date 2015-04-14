@@ -38,7 +38,7 @@ int mandelbrotInitialize();
 
 // Set the color table
 int mandelbrotSetColorTable(
-  unsigned int* aColorTable,
+  unsigned short int* aColorTable,
   unsigned int aColorTableSize);
 
 // Swap between using hardware and software to calculate
@@ -49,7 +49,7 @@ int mandelbrotCalculateFrame(
   double aStartX,
   double aStartY,
   double aScale,
-  unsigned int* aFrameBuffer);
+  unsigned short int* aFrameBuffer);
 
 // Release the Mandelbrot resources
 int mandelbrotRelease();

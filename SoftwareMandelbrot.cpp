@@ -28,8 +28,8 @@ extern unsigned int theWidth;
 extern unsigned int theHeight;
 
 // Local Data
-static int* theSoftColorTable = 0;
-static unsigned int theSoftColorTableSize = 0;
+static short int* theSoftColorTable = 0;
+static unsigned short int theSoftColorTableSize = 0;
 
 // compute the mandel value of a pixel
 inline unsigned int mandel_pixel(
@@ -72,7 +72,7 @@ int softwareInitialize()
 
 // Set the color table
 int softwareSetColorTable(
-  unsigned int* aColorTable,
+  unsigned short int* aColorTable,
   unsigned int aColorTableSize)
 {
   // If the color table is a different size than before
@@ -85,11 +85,11 @@ int softwareSetColorTable(
     if(theSoftColorTable) alignedFree(theSoftColorTable);
 
     // Create new table
-    theSoftColorTable = (int*)alignedMalloc(theSoftColorTableSize * sizeof(int));
+    theSoftColorTable = (short int*)alignedMalloc(theSoftColorTableSize * sizeof(short int));
   }
 
   // Write the color table data to the device on the current queue
-  memcpy(theSoftColorTable, aColorTable, theSoftColorTableSize*sizeof(int));
+  memcpy(theSoftColorTable, aColorTable, theSoftColorTableSize*sizeof(unsigned short int));
 
   // Return success
   return 0;
@@ -100,10 +100,10 @@ int softwareCalculateFrame(
   double aStartX,
   double aStartY,
   double aScale,
-  unsigned int* aFrameBuffer)
+  unsigned short int* aFrameBuffer)
 {
   // temporary pointer and index variables
-  unsigned int * fb_ptr = aFrameBuffer;
+  unsigned short int * fb_ptr = aFrameBuffer;
   unsigned int j, k, pixel;
 
   // window position variables

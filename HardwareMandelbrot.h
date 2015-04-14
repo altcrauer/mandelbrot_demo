@@ -35,14 +35,14 @@
 int hardwareInitialize();
 
 int hardwareSetColorTable(
-  unsigned int* aColorTable,
+  unsigned short int* aColorTable,
   unsigned int aColorTableSize);
 
 int hardwareCalculateFrame(
   float aStartX,
   float aStartY,
   float aScale,
-  unsigned int* aFrameBuffer);
+  unsigned short int* aFrameBuffer);
 
 int hardwareRelease();
 

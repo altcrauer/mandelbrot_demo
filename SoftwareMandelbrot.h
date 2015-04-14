@@ -32,13 +32,13 @@
 // Software Mandelbrot
 int softwareInitialize();
 
-int softwareSetColorTable(unsigned int* aColorTable,
+int softwareSetColorTable(unsigned short int* aColorTable,
   unsigned int aColorTableSize);
 
 int softwareCalculateFrame(double aStartX,
   double aStartY,
   double aScale,
-  unsigned int* aFrameBuffer);
+  unsigned short int* aFrameBuffer);
 
 int softwareRelease();
 

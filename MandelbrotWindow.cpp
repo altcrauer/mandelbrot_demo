@@ -26,7 +26,7 @@
 using namespace aocl_utils;
 
 // define color depth
-#define COLOR_DEPTH 32
+#define COLOR_DEPTH 16
 
 // The event used to poll the SDL event queue
 static SDL_Event theEvent;
@@ -65,7 +65,7 @@ unsigned testCurFrameCount = 0;
 
 
 void mandelbrotWindowRepaint();
-bool mandelbrotDumpFrame(unsigned frameIndex, unsigned int *pixels);
+bool mandelbrotDumpFrame(unsigned frameIndex, unsigned short int *pixels);
 
 // Initialize the window to a width and height specified
 int mandelbrotWindowInitialize(
@@ -218,7 +218,7 @@ int mandelbrotWindowUpdate()
     theCurrentX,
     theCurrentY,
     theCurrentScale,
-    (unsigned int*)theFrames[theCurrentFrame]->pixels);
+    (unsigned short int*)theFrames[theCurrentFrame]->pixels);
 
   const double end_time = getCurrentTimestamp();
   const double elapsed_time = end_time - start_time;
@@ -256,7 +256,7 @@ int mandelbrotWindowUpdate()
   // If in test mode, check if it's time to dump out the frame.
   if(testMode && testCurFrameCount < testFrameDump) 
   {
-    mandelbrotDumpFrame(testCurFrameCount, (unsigned int*)theFrames[theCurrentFrame]->pixels);
+    mandelbrotDumpFrame(testCurFrameCount, (unsigned short int*)theFrames[theCurrentFrame]->pixels);
   }
 
   // Return success
@@ -365,7 +365,7 @@ void mandelbrotWindowRepaint()
 }
 
 // Dumps the given frame's pixel data to a PPM file.
-bool mandelbrotDumpFrame(unsigned frameIndex, unsigned int *pixels) {
+bool mandelbrotDumpFrame(unsigned frameIndex, unsigned short int *pixels) {
   char fname[256];
   sprintf(fname, "frame%d.ppm", frameIndex);
 

@@ -68,7 +68,7 @@ extern unsigned theDemoRunning;
 void colorTableInit() 
 {
   // Allocate temporary space for the color table
-  unsigned int* aColorTable = (unsigned int*)alignedMalloc(COLOR_TABLE_SIZE * sizeof(unsigned int));
+  unsigned short int* aColorTable = (unsigned short int*)alignedMalloc(COLOR_TABLE_SIZE * sizeof(unsigned short int));
   
   // Initialize color table values
   for(unsigned int i = 0; i < COLOR_TABLE_SIZE; i++)

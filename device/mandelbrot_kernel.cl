@@ -22,7 +22,7 @@
 // Amount of loop unrolling. Higher unrolling amounts lead to higher
 // performance but also greater resource usage.
 #ifndef UNROLL
-#define UNROLL 20
+#define UNROLL 8
 #endif
 
 // Define the color black as 0
@@ -37,8 +37,8 @@ void hw_mandelbrot_frame (
 							const float y0,
 							const float stepSize,
 							const unsigned int maxIterations,
-							__global unsigned int *restrict framebuffer,
-							__constant const unsigned int *restrict colorLUT,
+							__global unsigned short int *restrict framebuffer,
+							__constant const unsigned short int *restrict colorLUT,
 							const unsigned int windowWidth)
 {
 	// Work-item position

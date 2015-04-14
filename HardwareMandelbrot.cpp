@@ -74,7 +74,7 @@ int hardwareSetFrameBufferSize()
     for(unsigned i = 0; i < numDevices; ++i) {
       // create the input pixel data buffer
       thePixelData[i] = clCreateBuffer(theContext, CL_MEM_WRITE_ONLY, 
-          thePixelDataWidth*rowsPerDevice[i]*sizeof(unsigned int), NULL, &theStatus);
+          thePixelDataWidth*rowsPerDevice[i]*sizeof(unsigned short int), NULL, &theStatus);
       checkError(theStatus, "Failed to create input pixel buffer");
     }
   }
@@ -152,7 +152,7 @@ int hardwareInitialize()
 
 // Set the color table
 int hardwareSetColorTable(
-  unsigned int* aColorTable,
+  unsigned short int* aColorTable,
   unsigned int aColorTableSize)
 {
   // If the color table is a different size than before
@@ -165,12 +165,12 @@ int hardwareSetColorTable(
     if(theHardColorTable) clReleaseMemObject(theHardColorTable);
 
     // Create new table
-    theHardColorTable = clCreateBuffer(theContext, CL_MEM_READ_ONLY, aColorTableSize*sizeof(unsigned int), NULL, &theStatus);
+    theHardColorTable = clCreateBuffer(theContext, CL_MEM_READ_ONLY, aColorTableSize*sizeof(unsigned short int), NULL, &theStatus);
     checkError(theStatus, "Failed to create color table buffer");
   }
 
   // Write the color table data to the device on the current queue
-  theStatus = clEnqueueWriteBuffer(theQueues[0], theHardColorTable, CL_TRUE, 0, aColorTableSize*sizeof(unsigned int), aColorTable, 0, NULL, NULL);
+  theStatus = clEnqueueWriteBuffer(theQueues[0], theHardColorTable, CL_TRUE, 0, aColorTableSize*sizeof(unsigned short int), aColorTable, 0, NULL, NULL);
   checkError(theStatus, "Failed to write to color table buffer");
 
   // Return success
@@ -182,7 +182,7 @@ int hardwareCalculateFrame(
   float aStartX,
   float aStartY,
   float aScale,
-  unsigned int* aFrameBuffer)
+  unsigned short int* aFrameBuffer)
 {
   // Make sure width and height match up
   hardwareSetFrameBufferSize();
@@ -226,7 +226,7 @@ int hardwareCalculateFrame(
   for(unsigned i = 0; i < numDevices; rowOffset += rowsPerDevice[i++])
   {
     // Read the output
-    theStatus = clEnqueueReadBuffer(theQueues[i], thePixelData[i], CL_TRUE, 0, thePixelDataWidth*rowsPerDevice[i]*sizeof(unsigned int), &aFrameBuffer[rowOffset * theWidth], 0, NULL, NULL);
+    theStatus = clEnqueueReadBuffer(theQueues[i], thePixelData[i], CL_TRUE, 0, thePixelDataWidth*rowsPerDevice[i]*sizeof(unsigned short int), &aFrameBuffer[rowOffset * theWidth], 0, NULL, NULL);
     checkError(theStatus, "Failed to read output");
   }
 

@@ -37,7 +37,7 @@ int mandelbrotInitialize()
 
 // Set the color table
 int mandelbrotSetColorTable(
-  unsigned int* aColorTable,
+  unsigned short int* aColorTable,
   unsigned int aColorTableSize)
 
 {
@@ -64,7 +64,7 @@ int mandelbrotCalculateFrame(
   double aStartX,
   double aStartY,
   double aScale,
-  unsigned int* aFramebuffer)
+  unsigned short int* aFramebuffer)
 {
   // Use either hardware or software to do the frame calculation
   if(theCalculationMethod == HARDWARE)
