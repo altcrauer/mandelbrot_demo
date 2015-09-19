@@ -23,7 +23,7 @@
 #define COORDINATES_H
 
 // Define the number of example coordinates
-#define NUMBER_OF_COORDINATES 12
+#define NUMBER_OF_COORDINATES 10
 
 // A structure containing origin positions and a scale for a Mandelbrot frame
 struct coordinates {
@@ -48,8 +48,8 @@ const struct coordinates theDemoLocations[NUMBER_OF_COORDINATES] =
   {0.3382314, -0.4132462, 0.0000002*demo_scale_factor},
   {-2.0, 1.15, 0.0035*demo_scale_factor},
   {-0.708210525513, -0.244819641113, 0.000000381470*demo_scale_factor},
-  {-2.0, 1.15, 0.0035*demo_scale_factor},
-  {-0.793605729416, -0.149912039936, 0.000000000373*demo_scale_factor},
+  //{-2.0, 1.15, 0.0035*demo_scale_factor},
+  //{-0.793605729416, -0.149912039936, 0.000000000373*demo_scale_factor},
 };
 
 // Location and scales of a set of positions for test mode.
