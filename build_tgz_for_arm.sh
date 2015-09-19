@@ -1,4 +1,4 @@
-make clean
+make -f Makefile.arm clean
 make -f Makefile.arm
 
 rm -fr tgz
